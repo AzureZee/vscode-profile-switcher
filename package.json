@@ -9,13 +9,83 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": ["onStartupFinished"],
+  "activationEvents": [
+    "onStartupFinished",""
+  ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": [
+      {
+        "title": "Profile Switcher",
+        "properties": {
+          "profileSwitcher.rules": {
+            "type": "array",
+            "scope": "application",
+            "items": {
+              "type": "object",
+              "properties": {
+                "profile": {
+                  "type": "string",
+                  "default": "",
+                  "description": "your profile name"
+                },
+                "folders": {
+                  "type": "array",
+                  "default": [],
+                  "description": "Specify some folders,\nAnd any subfolders opened under the specified folders,\nWill use the specified profile.",
+                  "items": {
+                    "type": "string",
+                    "default": ""
+                  }
+                },
+                "pattern": {
+                  "type": "object",
+                  "default": {
+                    "include": "",
+                    "exclude": ""
+                  },
+                  "required": [
+                    "include"
+                  ],
+                  "properties": {
+                    "include": {
+                      "type": "string",
+                      "default": ""
+                    },
+                    "exclude": {
+                      "type": "string",
+                      "default": ""
+                    }
+                  }
+                },
+                "fileExts": {
+                  "type": "array",
+                  "default": [],
+                  "items": {
+                    "type": "string",
+                    "default": ""
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "profile"
+              ]
+            }
+          }
+        }
+      }
+    ],
     "commands": [
       {
-        "command": "vscode-profile-switcher.helloWorld",
-        "title": "Hello World"
+        "command": "profileSwitcher.generateTemplate",
+        "title": "Generate configuration template",
+        "category": "ProfileSwitcher"
+      },
+      {
+        "command": "profileSwitcher.reloadConfig",
+        "title": "Reload configuration",
+        "category": "ProfileSwitcher"
       }
     ]
   },
