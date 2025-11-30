@@ -1,15 +1,3 @@
-// extension
-// 1. open window, extension activated, executed once
-// 2. open workspaceFolder, match parent folder or match files
-// 3. no folder, open document, match file ext
-// 4. no folder not open document, no operation
-// statusBar
-// 1. click, execute BUILT_IN_COMMAND.
-// 2. hover, show ToolTip
-// tooltip:
-// 1.generateTemplate
-// 2.reload extension (updated profiles, use this reload extension config)
-
 import * as vscode from "vscode";
 import { Environment } from "./environment";
 import { generateTemplate, TEMPLATE_FILE_NAME } from "./generate_template";
