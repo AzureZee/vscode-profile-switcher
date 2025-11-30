@@ -12,7 +12,7 @@
 
 import * as vscode from "vscode";
 import { Environment } from "./environment";
-import { generateTemplate } from "./generate_template";
+import { generateTemplate,TEMPLATE_FILE_NAME } from "./generate_template";
 import { RulesMap } from "./rules";
 import { WorkbenchState } from "./workbench_state";
 
@@ -199,7 +199,7 @@ function switchForActiveFile(
   }
   function getActiveFileExt(document: vscode.TextDocument) {
     const fileName = document.fileName;
-    if (!fileName) {
+    if (!fileName||fileName.includes(TEMPLATE_FILE_NAME)) {
       return null;
     }
     const parts = fileName.split(".");
