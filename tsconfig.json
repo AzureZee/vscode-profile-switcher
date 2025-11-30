@@ -6,6 +6,7 @@
 		"lib": [
 			"ES2022"
 		],
+		"newLine": "lf",
 		"sourceMap": true,
 		"rootDir": "src",
 		"strict": true,   /* enable all strict type-checking options */
