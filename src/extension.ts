@@ -144,8 +144,14 @@ async function switchForRules(
   }
   if (targetByFolders.size !== 0) {
     //
+    let getParentFolder = ()=>{
+      let _parent = currentFolder.split('\\');
+      _parent.splice(-1,1);
+      return _parent;
+    };
+    const parentFolder = getParentFolder();
     for (const folders of targetByFolders.keys()) {
-      if (matchParentFolder(currentFolder, folders)) {
+      if (matchParentFolder(parentFolder, folders)) {
         return switchToTarget(targetByFolders.get(folders));
       }
     }
@@ -161,9 +167,9 @@ async function switchForRules(
     }
   }
   //
-  function matchParentFolder(workspaceFolder: string, folders: string[]) {
+  function matchParentFolder(parentFolder: string[], folders: string[]) {
     for (const folder of folders) {
-      if (workspaceFolder.includes(folder)) {
+      if (parentFolder.includes(folder)) {
         return true;
       }
     }
