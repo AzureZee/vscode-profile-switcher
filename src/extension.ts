@@ -35,7 +35,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
   await env.init();
   rulesMap.bulid(env.locationIdByProfile);
-  workbenchState.setState();
 
   await switchForRules(rulesMap, workbenchState);
   //
@@ -50,7 +49,7 @@ export async function activate(context: vscode.ExtensionContext) {
   //
   const lisentOpenTextDocument = vscode.workspace.onDidOpenTextDocument(
     (document) => {
-      workbenchState.setState();
+      workbenchState = new WorkbenchState();
       if (
         workbenchState.isWorkspaceFile ||
         workbenchState.currentFolder !== "" ||
@@ -65,7 +64,8 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   const lisentCloseTextDocument = vscode.workspace.onDidCloseTextDocument(
     () => {
-      workbenchState.setState();
+      workbenchState = new WorkbenchState();
+
       if (
         workbenchState.isWorkspaceFile ||
         workbenchState.currentFolder !== ""
@@ -90,7 +90,7 @@ export async function activate(context: vscode.ExtensionContext) {
       env = new Environment(context);
       await env.init();
       rulesMap.bulid(env.locationIdByProfile);
-      workbenchState.setState();
+      workbenchState = new WorkbenchState();
     }
   );
 
@@ -144,9 +144,9 @@ async function switchForRules(
   }
   if (targetByFolders.size !== 0) {
     //
-    let getParentFolder = ()=>{
-      let _parent = currentFolder.split('\\');
-      _parent.splice(-1,1);
+    let getParentFolder = () => {
+      let _parent = currentFolder.split("\\");
+      _parent.splice(-1, 1);
       return _parent;
     };
     const parentFolder = getParentFolder();
