@@ -1,9 +1,8 @@
 import * as vscode from "vscode";
-export const TEMPLATE_FILE_NAME="switcher_rules_template.jsonc";
+export const TEMPLATE_FILE_NAME = "switcher_rules_template.jsonc";
 export async function generateTemplate(
   locationIdByProfile: Map<string, string>
 ) {
-
   const template = [];
   for (const profileName of locationIdByProfile.keys()) {
     const folder = [`${profileName}-proj`];
@@ -37,7 +36,9 @@ export async function generateTemplate(
       fileUri,
       Buffer.from(commentedContent, "utf8")
     );
-    
-    vscode.window.showTextDocument(await vscode.workspace.openTextDocument(fileUri));
+
+    vscode.window.showTextDocument(
+      await vscode.workspace.openTextDocument(fileUri)
+    );
   }
 }

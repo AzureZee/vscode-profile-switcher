@@ -12,7 +12,7 @@
 
 import * as vscode from "vscode";
 import { Environment } from "./environment";
-import { generateTemplate,TEMPLATE_FILE_NAME } from "./generate_template";
+import { generateTemplate, TEMPLATE_FILE_NAME } from "./generate_template";
 import { RulesMap } from "./rules";
 import { WorkbenchState } from "./workbench_state";
 
@@ -30,10 +30,10 @@ let statusBar: vscode.StatusBarItem;
 //
 export async function activate(context: vscode.ExtensionContext) {
   let workbenchState = new WorkbenchState();
-  let env = new Environment();
+  let env = new Environment(context);
   let rulesMap = new RulesMap();
 
-  await env.build(context);
+  await env.init();
   rulesMap.bulid(env.locationIdByProfile);
   workbenchState.setState();
 
@@ -87,7 +87,8 @@ export async function activate(context: vscode.ExtensionContext) {
   const reloadCommand = vscode.commands.registerCommand(
     MY_EXT_COMMAND[1],
     async () => {
-      await env.build(context);
+      env = new Environment(context);
+      await env.init();
       rulesMap.bulid(env.locationIdByProfile);
       workbenchState.setState();
     }
@@ -123,6 +124,9 @@ async function switchForRules(
   const { isWorkspaceFile, currentFolder, isOpenTextDocument, isNothing } =
     workbenchState;
 
+  if (isNothing) {
+    return;
+  }
   if (isWorkspaceFile) {
     return;
   }
@@ -136,8 +140,6 @@ async function switchForRules(
       vscode.window.activeTextEditor.document,
       targetByFileExts
     );
-  }
-  if (isNothing) {
     return;
   }
   if (targetByFolders.size !== 0) {
@@ -158,6 +160,7 @@ async function switchForRules(
       }
     }
   }
+  //
   function matchParentFolder(workspaceFolder: string, folders: string[]) {
     for (const folder of folders) {
       if (workspaceFolder.includes(folder)) {
@@ -166,16 +169,15 @@ async function switchForRules(
     }
     return false;
   }
-
+  //
   async function matchPattern(
     folder: string,
     include: string,
     exclude?: string | null
   ) {
     const _include = new vscode.RelativePattern(folder, include);
-
     const result = await vscode.workspace.findFiles(_include, exclude, 10);
-    return result ? true : false;
+    return result.length !== 0 ? true : false;
   }
 }
 
@@ -188,6 +190,7 @@ function switchForActiveFile(
   if (!activeFileExt) {
     return;
   }
+  //
   for (const fileExts of targetByFileExts.keys()) {
     if (matchFileExts(fileExts, activeFileExt)) {
       counter += 1;
@@ -197,9 +200,10 @@ function switchForActiveFile(
   function matchFileExts(fileExts: string[], activeFileExt: string) {
     return fileExts.includes(activeFileExt);
   }
+  //
   function getActiveFileExt(document: vscode.TextDocument) {
     const fileName = document.fileName;
-    if (!fileName||fileName.includes(TEMPLATE_FILE_NAME)) {
+    if (!fileName || fileName.includes(TEMPLATE_FILE_NAME)) {
       return null;
     }
     const parts = fileName.split(".");

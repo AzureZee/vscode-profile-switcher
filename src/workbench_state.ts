@@ -1,16 +1,11 @@
 import * as vscode from "vscode";
 
 export class WorkbenchState {
-  isWorkspaceFile: boolean;
-  currentFolder: string;
-  isOpenTextDocument: boolean;
-  isNothing: boolean;
-  constructor() {
-    this.isWorkspaceFile = false;
-    this.currentFolder = "";
-    this.isOpenTextDocument = false;
-    this.isNothing = false;
-  }
+  isWorkspaceFile: boolean = false;
+  currentFolder: string = "";
+  isOpenTextDocument: boolean = false;
+  isNothing: boolean = false;
+
   setState() {
     this.resetState();
     const workspace = vscode.workspace;
