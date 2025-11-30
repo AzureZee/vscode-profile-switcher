@@ -1,71 +1,59 @@
-# vscode-profile-switcher README
+# VSCode Profile Switcher
 
-This is the README for your extension "vscode-profile-switcher". After writing up a brief description, we recommend including the following sections.
+## 中文说明
 
-## Features
+VSCode Profile Switcher 是一个 VSCode 扩展，可以根据不同的条件自动切换 VSCode 配置文件（Profile）。
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### 功能特性
+- 根据打开的文件夹自动切换配置文件
+- 根据工作区文件自动切换配置文件
+- 根据打开的文件扩展名自动切换配置文件
+- 可通过状态栏手动切换配置文件
+- 支持通过配置规则自定义切换逻辑
 
-For example if there is an image subfolder under your extension project workspace:
+### 使用方法
+1. 安装扩展
+2. 配置切换规则（在设置中配置 `profileSwitcher.rules`）
+3. 在命令面板输入 `Gen template` 生成配置模板文件，修改模版，再复制到`setting.json`
+4. 扩展会根据配置的规则自动切换配置文件
 
-\!\[feature X\]\(images/feature-x.png\)
+### 配置选项
+在 VSCode 设置中可以配置 `profileSwitcher.rules`，规则包含以下字段：
+- `profile`: 配置文件名称
+- `folders`: 指定文件夹，当打开这些指定文件夹下的子文件夹时使用指定的配置文件
+- `pattern`: 使用文件匹配模式，当工作区包含匹配的文件时使用指定的配置文件
+- `fileExts`: 根据文件扩展名切换配置文件
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+### 命令
+- `Profiles: Gen template`: 生成配置模板文件
+- `Profiles: Reload configuration`: 重新加载配置（当更改配置文件后使用）
 
 ---
 
-## Following extension guidelines
+## English Documentation
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+VSCode Profile Switcher is a VSCode extension that automatically switches VSCode profiles based on different conditions.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+### Features
+- Automatically switch profiles based on opened folders
+- Automatically switch profiles based on workspace files
+- Automatically switch profiles based on opened file extensions
+- Manually switch profiles via status bar
+- Support custom switching logic through configuration rules
 
-## Working with Markdown
+### Usage
+1. Install the extension
+2. Configure switching rules (configure `profileSwitcher.rules` in settings)
+3. Enter `Gen template` in the command palette to generate a configuration template file, modify the template, and then copy it to `setting.json`
+4. The extension will automatically switch profiles according to the configured rules
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+### Configuration Options
+In VSCode settings, you can configure `profileSwitcher.rules` with the following fields:
+- `profile`: Profile name
+- `folders`: Specify folders, when subfolders under these specified folders are opened, use the specified profile
+- `pattern`: Use file matching patterns, when the workspace contains matching files, use the specified profile
+- `fileExts`: Switch profiles based on file extensions
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+### Commands
+- `Profiles: Gen template`: Generate configuration template file
+- `Profiles: Reload configuration`: Reload configuration (use after changing profiles)

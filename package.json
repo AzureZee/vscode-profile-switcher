@@ -32,7 +32,7 @@
                 "folders": {
                   "type": "array",
                   "default": [],
-                  "description": "Specify some folders,\nAnd any subfolders opened under the specified folders,\nWill use the specified profile.",
+                  "description": "Specify folders, when subfolders under these specified folders are opened, use the specified profile",
                   "items": {
                     "type": "string",
                     "default": ""
@@ -79,13 +79,13 @@
     "commands": [
       {
         "command": "profileSwitcher.generateTemplate",
-        "title": "Generate configuration template",
-        "category": "ProfileSwitcher"
+        "title": "Gen template",
+        "category": "Profiles"
       },
       {
         "command": "profileSwitcher.reloadConfig",
         "title": "Reload configuration",
-        "category": "ProfileSwitcher"
+        "category": "Profiles"
       }
     ]
   },
