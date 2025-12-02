@@ -1,6 +1,7 @@
 .vscode/**
 .vscode-test/**
 src/**
+out/test
 .gitignore
 .yarnrc
 **/tsconfig.json
@@ -9,3 +10,4 @@ src/**
 **/*.ts
 **/.vscode-test.*
 pnpm-lock.yaml
+CHANGELOG.md

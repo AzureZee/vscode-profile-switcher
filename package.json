@@ -1,11 +1,33 @@
 {
   "name": "vscode-profile-switcher",
   "displayName": "VSCode Profile Switcher",
-  "description": "",
-  "version": "0.0.1",
+  "icon": "img/icon.png",
+  "description": "Automatically switches VSCode profiles based on different conditions.",
+  "version": "1.0.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "publisher": "AzureZee",
+  "author": {
+    "name": "AzureZee",
+    "url": "https://github.com/AzureZee"
+  },
+  "homepage": "https://github.com/AzureZee/vscode-profile-switcher/blob/main/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AzureZee/vscode-profile-switcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AzureZee/vscode-profile-switcher/issues"
+  },
   "engines": {
     "vscode": "^1.106.1"
   },
+  "keywords": [
+    "profile",
+    "profile name",
+    "code profile name",
+    "switch profile",
+    "change profile"
+  ],
   "categories": [
     "Other"
   ],
@@ -13,6 +35,24 @@
     "onStartupFinished"
   ],
   "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.106.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.46.3",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  },
   "contributes": {
     "configuration": [
       {
@@ -87,32 +127,16 @@
     "commands": [
       {
         "command": "profileSwitcher.generateTemplate",
-        "title": "Gen template",
+        "title": "Generate template",
+        "shortTitle": "Gen template",
         "category": "Profiles"
       },
       {
         "command": "profileSwitcher.reloadConfig",
         "title": "Reload configuration",
+        "shortTitle": "Re config",
         "category": "Profiles"
       }
     ]
-  },
-  "scripts": {
-    "vscode:prepublish": "pnpm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.106.1",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "22.x",
-    "typescript-eslint": "^8.46.3",
-    "eslint": "^9.39.1",
-    "typescript": "^5.9.3",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
   }
 }

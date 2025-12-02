@@ -21,9 +21,6 @@ export async function activate(context: vscode.ExtensionContext) {
   let env = new Environment(context);
   await env.init();
   let rulesMap = new RulesMap(env.locationIdByProfile);
-let include=["Cargo.toml","src/*.rs"];
-  const newLocal = await matchPattern(workbenchState.currentFolder, include);
-debugger;
 
   await switchForRules(rulesMap, workbenchState);
   //
@@ -152,7 +149,6 @@ async function switchForRules(
   if (targetByManifest.size !== 0) {
     //
     for (const manifest of targetByManifest.keys()) {
-      
       if (await matchPattern(currentFolder, manifest)) {
         return switchToTarget(targetByManifest.get(manifest));
       }
@@ -198,9 +194,7 @@ async function switchForRules(
       );
       resultList.push(fileUriList);
     }
-    const isAllFound = (result: vscode.Uri[]) => {
-      result.length !== 0;
-    };
+    const isAllFound = (result: vscode.Uri[]) => result.length !== 0;    
     return resultList.every(isAllFound);
   }
 }
@@ -243,29 +237,4 @@ async function switchToTarget(target: string | undefined) {
       `${CMD_ACTIVATE_PROFILE_PREFIX}${target}`
     );
   }
-}
-
-async function matchPattern(
-  folder: string,
-  include: string[],
-  exclude?: string | null,
-  maxResults?: number
-) {
-  let patternList: vscode.RelativePattern[] = [];
-  let resultList: vscode.Uri[][] = [];
-  for (const _include of include) {
-    const _pattern = new vscode.RelativePattern(folder, _include);
-    patternList.push(_pattern);
-  }
-  for (const pattern of patternList) {
-    const fileUriList = await vscode.workspace.findFiles(
-      pattern,
-      exclude,
-      maxResults
-    );
-    resultList.push(fileUriList);
-  }
-  const isAllFound = (result: vscode.Uri[]) => result.length !== 0;
-  
-  return resultList.every(isAllFound);
 }
