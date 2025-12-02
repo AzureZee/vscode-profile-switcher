@@ -9,7 +9,8 @@ export async function generateTemplate(
     const rule = {
       profile: profileName,
       folders: folder,
-      pattern: { include: "", exclude: "" },
+      projectManifestFile:[],
+      pattern: { include: [], exclude: "" },
       fileExts: [],
     };
     template.push(rule);

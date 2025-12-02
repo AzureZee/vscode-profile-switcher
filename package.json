@@ -38,19 +38,27 @@
                     "default": ""
                   }
                 },
+                "projectMainfestFile":{
+                  "type": "array",
+                  "default": [],
+                  "items": {
+                    "type": "string",
+                    "default": ""
+                  }
+                },
                 "pattern": {
                   "type": "object",
-                  "default": {
-                    "include": "",
-                    "exclude": ""
-                  },
                   "required": [
                     "include"
                   ],
                   "properties": {
                     "include": {
-                      "type": "string",
-                      "default": ""
+                      "type": "array",
+                      "default": [],
+                      "items": {
+                        "type": "string",
+                        "default": ""
+                      }
                     },
                     "exclude": {
                       "type": "string",
