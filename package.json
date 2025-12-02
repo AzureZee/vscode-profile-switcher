@@ -1,7 +1,7 @@
 {
   "name": "vscode-profile-switcher",
   "displayName": "VSCode Profile Switcher",
-  "icon": "img/icon.png",
+  "icon": "assets/icon.png",
   "description": "Automatically switches VSCode profiles based on different conditions.",
   "version": "1.0.0",
   "license": "SEE LICENSE IN LICENSE",
@@ -78,7 +78,7 @@
                     "default": ""
                   }
                 },
-                "projectMainfestFile":{
+                "projectManifestFile":{
                   "type": "array",
                   "default": [],
                   "items": {

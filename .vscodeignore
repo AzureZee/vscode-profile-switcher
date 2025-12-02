@@ -11,3 +11,4 @@ out/test
 **/.vscode-test.*
 pnpm-lock.yaml
 CHANGELOG.md
+img
