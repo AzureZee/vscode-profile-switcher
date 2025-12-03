@@ -3,7 +3,7 @@
   "displayName": "VSCode Profile Automatic Switcher",
   "icon": "assets/icon.png",
   "description": "Automatically switches VSCode profiles based on different conditions.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "SEE LICENSE IN LICENSE",
   "publisher": "azure-zee",
   "author": {
@@ -78,7 +78,7 @@
                     "default": ""
                   }
                 },
-                "projectManifestFile":{
+                "projectManifestFile": {
                   "type": "array",
                   "default": [],
                   "items": {
