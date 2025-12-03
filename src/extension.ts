@@ -22,18 +22,7 @@ export async function activate(context: vscode.ExtensionContext) {
   await env.init();
   let rulesMap = new RulesMap(env.locationIdByProfile);
 
-  await switchForRules(rulesMap, workbenchState);
-  //
-  statusBar = vscode.window.createStatusBarItem(
-    "Switch.button",
-    vscode.StatusBarAlignment.Left,
-    Number.MAX_VALUE
-  );
-  statusBar.command = BUILT_IN_COMMAND;
-  statusBar.text = "Profile Switcher";
-  statusBar.show();
-  //
-  const lisentOpenTextDocument = vscode.workspace.onDidOpenTextDocument(
+  const listenOpenTextDocument = vscode.workspace.onDidOpenTextDocument(
     (document) => {
       workbenchState = new WorkbenchState();
       if (
@@ -48,7 +37,7 @@ export async function activate(context: vscode.ExtensionContext) {
       switchForActiveFile(document, rulesMap.targetByFileExts);
     }
   );
-  const lisentCloseTextDocument = vscode.workspace.onDidCloseTextDocument(
+  const listenCloseTextDocument = vscode.workspace.onDidCloseTextDocument(
     () => {
       workbenchState = new WorkbenchState();
 
@@ -79,15 +68,29 @@ export async function activate(context: vscode.ExtensionContext) {
       workbenchState = new WorkbenchState();
     }
   );
+  //
+  statusBar = vscode.window.createStatusBarItem(
+    "Switch.button",
+    vscode.StatusBarAlignment.Left,
+    Number.MAX_VALUE
+  );
+  statusBar.command = BUILT_IN_COMMAND;
+  statusBar.text = "Profile Switcher";
+  statusBar.show();
 
   context.subscriptions.push(
     statusBar,
     genTempCommand,
     reloadCommand,
-    lisentOpenTextDocument,
-    lisentCloseTextDocument,
+    listenOpenTextDocument,
+    listenCloseTextDocument,
     vscode.workspace.onDidChangeConfiguration(handleConfigChange)
   );
+  try {
+    switchForRules(rulesMap, workbenchState);
+  } catch (error) {
+    console.log(`switchForRules\n${error}`);
+  }
 
   //
   function handleConfigChange(event: vscode.ConfigurationChangeEvent) {
@@ -194,7 +197,7 @@ async function switchForRules(
       );
       resultList.push(fileUriList);
     }
-    const isAllFound = (result: vscode.Uri[]) => result.length !== 0;    
+    const isAllFound = (result: vscode.Uri[]) => result.length !== 0;
     return resultList.every(isAllFound);
   }
 }
@@ -231,10 +234,13 @@ function switchForActiveFile(
 }
 
 //
-async function switchToTarget(target: string | undefined) {
-  if (target) {
-    await vscode.commands.executeCommand(
-      `${CMD_ACTIVATE_PROFILE_PREFIX}${target}`
-    );
+function switchToTarget(target: string | undefined) {
+  if (!target) {
+    return;
+  }
+  try {
+    vscode.commands.executeCommand(`${CMD_ACTIVATE_PROFILE_PREFIX}${target}`);
+  } catch (error) {
+    console.log(`executeCommand\n${error}`);
   }
 }

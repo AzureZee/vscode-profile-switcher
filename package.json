@@ -60,7 +60,7 @@
         "properties": {
           "profileSwitcher.rules": {
             "type": "array",
-            "scope": "application",
+            "scope": "window",
             "items": {
               "type": "object",
               "properties": {
