@@ -1,11 +1,11 @@
 {
-  "name": "vscode-profile-switcher",
-  "displayName": "VSCode Profile Switcher",
+  "name": "vscode-profile-automatic-switcher",
+  "displayName": "VSCode Profile Automatic Switcher",
   "icon": "assets/icon.png",
   "description": "Automatically switches VSCode profiles based on different conditions.",
   "version": "1.0.0",
   "license": "SEE LICENSE IN LICENSE",
-  "publisher": "AzureZee",
+  "publisher": "azure-zee",
   "author": {
     "name": "AzureZee",
     "url": "https://github.com/AzureZee"
