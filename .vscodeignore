@@ -1,13 +1,8 @@
-.vscode/**
-.vscode-test/**
-src/**
-out/test
-.gitignore
-.yarnrc
-**/tsconfig.json
-**/eslint.config.mjs
-**/*.map
-**/*.ts
-**/.vscode-test.*
-pnpm-lock.yaml
-CHANGELOG.md
+# Ignore everything
+**
+
+# Whitelist
+!dist/extension.js
+!README.md
+!package.json
+!assets
